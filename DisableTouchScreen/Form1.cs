@@ -19,56 +19,47 @@ namespace DisableTouchScreen
             this.WindowState = FormWindowState.Minimized;
             Hide();
             notifyIcon.Visible = true;
-
+            TrayMenuContext();
         }
+
+
+        /*
+         * 
+         */
+        private void TrayMenuContext()
+        {
+            this.notifyIcon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.DISABLE_TEXT, null, this.DisableTouchScreen_Click);
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.QUIT_TEXT, null, this.QuitApplication_Click);
+        }
+
 
         /*
          *
          */
-        private void notifyIcon_MouseUp(object sender, MouseEventArgs e)
+        private void DisableTouchScreen_Click(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {   
-                contextMenuStrip.Show(Control.MousePosition);
-            }
+            EnableDisableTouchScreen(Constants.DISABLE_FLAG);
+            this.notifyIcon.ContextMenuStrip.Items.Clear();
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.ENABLE_TEXT, null, this.EnableTouchScreen_Click);
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.QUIT_TEXT, null, this.QuitApplication_Click);
+            this.notifyIcon.Icon = Properties.Resources.Disable;
+        }
+
+        private void EnableTouchScreen_Click(object sender, EventArgs e)
+        {
+            EnableDisableTouchScreen(Constants.ENABLE_FLAG);
+            this.notifyIcon.ContextMenuStrip.Items.Clear();
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.DISABLE_TEXT, null, this.DisableTouchScreen_Click);
+            this.notifyIcon.ContextMenuStrip.Items.Add(Constants.QUIT_TEXT, null, this.QuitApplication_Click);
+            this.notifyIcon.Icon = Properties.Resources.Enable;
         }
 
 
         /*
          * 
          */
-        private void OnContextMenuItem_Clicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            if(e.ClickedItem.Text.Equals(Constants.QUIT_TEXT))
-            {
-                QuitApplication();
-            }
-            else if(e.ClickedItem.Text.Equals(Constants.DISABLE_TEXT))
-            {
-                EnableDisableTouchScreen(Constants.DISABLE_FLAG);
-                contextMenuStrip.Items.Clear();
-                contextMenuStrip.Items.Add(Constants.ENABLE_TEXT);
-                contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
-                this.notifyIcon.Icon = Properties.Resources.Disable;
-            }
-            else
-            {
-                EnableDisableTouchScreen(Constants.ENABLE_FLAG);
-                contextMenuStrip.Items.Clear();
-                contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
-                contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
-                this.notifyIcon.Icon = Properties.Resources.Enable;
-            }
-
-
-           
-        }
-
-
-        /*
-         * 
-         */
-        private void QuitApplication()
+        private void QuitApplication_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
@@ -109,5 +100,6 @@ namespace DisableTouchScreen
                 Console.WriteLine("Enabling the touchscreen!");
             }
         }
+
     }
 }

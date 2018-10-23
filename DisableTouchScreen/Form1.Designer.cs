@@ -33,7 +33,6 @@ namespace DisableTouchScreen
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -41,13 +40,7 @@ namespace DisableTouchScreen
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Right click to Disable/ Enable TouchScreen";
             this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseUp);
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
-            this.contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
-            this.contextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.OnContextMenuItem_Clicked);
+            this.notifyIcon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             // 
             // Form1
             // 
@@ -63,6 +56,5 @@ namespace DisableTouchScreen
         #endregion
 
         private NotifyIcon notifyIcon;
-        private ContextMenuStrip contextMenuStrip;
     }
 }
