@@ -46,6 +46,7 @@ namespace DisableTouchScreen
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
+            this.contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
             this.contextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.OnContextMenuItem_Clicked);
             // 
             // Form1

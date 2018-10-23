@@ -13,6 +13,7 @@ namespace DisableTouchScreen
     {
         public const string ENABLE_TEXT = "Enable Touchscreen";
         public const string DISABLE_TEXT = "Disable TouchScreen";
+        public const string QUIT_TEXT = "Quit";
 
         public const int ENABLE_FLAG = 0;
         public const int DISABLE_FLAG = 1;

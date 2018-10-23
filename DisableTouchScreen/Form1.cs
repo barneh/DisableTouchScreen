@@ -39,11 +39,16 @@ namespace DisableTouchScreen
          */
         private void OnContextMenuItem_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if(e.ClickedItem.Text.Equals(Constants.DISABLE_TEXT))
+            if(e.ClickedItem.Text.Equals(Constants.QUIT_TEXT))
+            {
+                QuitApplication();
+            }
+            else if(e.ClickedItem.Text.Equals(Constants.DISABLE_TEXT))
             {
                 EnableDisableTouchScreen(Constants.DISABLE_FLAG);
                 contextMenuStrip.Items.Clear();
                 contextMenuStrip.Items.Add(Constants.ENABLE_TEXT);
+                contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
                 this.notifyIcon.Icon = Properties.Resources.Disable;
             }
             else
@@ -51,9 +56,21 @@ namespace DisableTouchScreen
                 EnableDisableTouchScreen(Constants.ENABLE_FLAG);
                 contextMenuStrip.Items.Clear();
                 contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
+                contextMenuStrip.Items.Add(Constants.QUIT_TEXT);
                 this.notifyIcon.Icon = Properties.Resources.Enable;
             }
+
+
            
+        }
+
+
+        /*
+         * 
+         */
+        private void QuitApplication()
+        {
+            System.Windows.Forms.Application.Exit();
         }
 
 
