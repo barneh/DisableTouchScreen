@@ -22,6 +22,9 @@ namespace DisableTouchScreen
 
         }
 
+        /*
+         *
+         */
         private void notifyIcon_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -30,25 +33,32 @@ namespace DisableTouchScreen
             }
         }
 
+
+        /*
+         * 
+         */
         private void OnContextMenuItem_Clicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            ToolStripItem clickedItem = e.ClickedItem;
-            if(clickedItem.Text.Equals(Constants.ENABLE_TEXT))
+            if(e.ClickedItem.Text.Equals(Constants.DISABLE_TEXT))
             {
-                EnableTouchScreen();
+                EnableDisableTouchScreen(Constants.DISABLE_FLAG);
                 contextMenuStrip.Items.Clear();
-                contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
+                contextMenuStrip.Items.Add(Constants.ENABLE_TEXT);
             }
             else
             {
-                DisableTouchScreen();
+                EnableDisableTouchScreen(Constants.ENABLE_FLAG);
                 contextMenuStrip.Items.Clear();
-                contextMenuStrip.Items.Add(Constants.ENABLE_TEXT);
+                contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
             }
            
         }
 
-        private void EnableTouchScreen()
+
+        /**
+         *
+         */
+        private void EnableDisableTouchScreen(int flag)
         {
             /*
             Process p = new Process();
@@ -64,16 +74,21 @@ namespace DisableTouchScreen
             */
             Process pr = new Process();
             pr.StartInfo.FileName = "cmd.exe";
-            //pr.StartInfo.Arguments = "/k ipconfig";
-            pr.StartInfo.Arguments = "/k C:/DisableTouchScreen/touchscreen.bat";
+            pr.StartInfo.Arguments = "/k ipconfig";
             pr.StartInfo.UseShellExecute = false;
             pr.StartInfo.CreateNoWindow = true;
             pr.Start();
-        }
 
-        private void DisableTouchScreen()
-        {
-            //devcon enable '%touchscreenid%')";
+            if (flag == Constants.DISABLE_FLAG)
+            {
+                // here we disable the touch screen
+                Console.WriteLine("Disabling the touchscreen!");
+            }
+            else
+            {
+                // here we enable the touch screen
+                Console.WriteLine("Enabling the touchscreen!");
+            }
         }
     }
 }
