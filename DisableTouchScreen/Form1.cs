@@ -44,12 +44,14 @@ namespace DisableTouchScreen
                 EnableDisableTouchScreen(Constants.DISABLE_FLAG);
                 contextMenuStrip.Items.Clear();
                 contextMenuStrip.Items.Add(Constants.ENABLE_TEXT);
+                this.notifyIcon.Icon = Properties.Resources.Disable;
             }
             else
             {
                 EnableDisableTouchScreen(Constants.ENABLE_FLAG);
                 contextMenuStrip.Items.Clear();
                 contextMenuStrip.Items.Add(Constants.DISABLE_TEXT);
+                this.notifyIcon.Icon = Properties.Resources.Enable;
             }
            
         }
